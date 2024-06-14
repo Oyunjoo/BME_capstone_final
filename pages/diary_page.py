@@ -339,18 +339,18 @@ def main():
                 st.success("분석이 완료되었습니다. '분석 결과' 탭을 확인하세요.")
 
         with tabs[1]:
-            zip_path = "AppleSDGothicNeo.ttc.zip"
+            # zip_path = "AppleSDGothicNeo.ttc.zip"
 
-            # Extract the font file from the zip archive
-            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                # Assuming the font file is named 'AppleSDGothicNeo.ttc' inside the zip archive
-                font_filename = 'AppleSDGothicNeo.ttc'
-                zip_ref.extract(font_filename, '/tmp')
+            # # Extract the font file from the zip archive
+            # with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            #     # Assuming the font file is named 'AppleSDGothicNeo.ttc' inside the zip archive
+            #     font_filename = 'AppleSDGothicNeo.ttc'
+            #     zip_ref.extract(font_filename, '/tmp')
 
-            # Path to the extracted font file
-            extracted_font_path = os.path.join('/tmp', font_filename)
-            font_name = font_manager.FontProperties(fname=extracted_font_path).get_name()
-            rc('font', family=font_name)
+            # # Path to the extracted font file
+            # extracted_font_path = os.path.join('/tmp', font_filename)
+            # font_name = font_manager.FontProperties(fname=extracted_font_path).get_name()
+            # rc('font', family=font_name)
 
             if 'sentiment_probs' in st.session_state:
                 if flag == 1:
@@ -360,7 +360,7 @@ def main():
                     st.write("#### 감정 분포")
                     # 원형 차트로 변경
                     
-                    names = list(st.session_state['sentiment_probs'].keys())
+                    names = ['Very Bad', 'Bad', 'So-so', 'Good', 'Very Good']
                     values = [st.session_state['sentiment_probs'][name] for name in names]
                     
                     # Define custom colors if necessary
