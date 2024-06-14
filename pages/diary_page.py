@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc
 from matplotlib import font_manager as fm
 import os
-import requests
+import zipfile
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
@@ -339,9 +339,17 @@ def main():
                 st.success("분석이 완료되었습니다. '분석 결과' 탭을 확인하세요.")
 
         with tabs[1]:
-            # 구글 폰트에서 Noto Sans KR TTF 파일 다운로드
-            font_path = "AppleSDGothicNeo.ttc"  # 한글 폰트 경로
-            font_name = font_manager.FontProperties(fname=font_path).get_name()
+            zip_path = "AppleSDGothicNeo.ttc.zip"
+
+            # Extract the font file from the zip archive
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                # Assuming the font file is named 'AppleSDGothicNeo.ttc' inside the zip archive
+                font_filename = 'AppleSDGothicNeo.ttc'
+                zip_ref.extract(font_filename, '/tmp')
+
+            # Path to the extracted font file
+            extracted_font_path = os.path.join('/tmp', font_filename)
+            font_name = font_manager.FontProperties(fname=extracted_font_path).get_name()
             rc('font', family=font_name)
 
             if 'sentiment_probs' in st.session_state:
