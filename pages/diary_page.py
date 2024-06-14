@@ -360,7 +360,8 @@ def main():
                     st.write("#### 감정 분포")
                     # 원형 차트로 변경
                     
-                    names = ['Very Bad', 'Bad', 'So-so', 'Good', 'Very Good']
+                    names1 = ['Very Bad', 'Bad', 'So-so', 'Good', 'Very Good']
+                    names = list(st.session_state['sentiment_probs'].keys())
                     values = [st.session_state['sentiment_probs'][name] for name in names]
                     
                     # Define custom colors if necessary
@@ -372,7 +373,7 @@ def main():
                                                     startangle=90, counterclock=True)
 
                     # Set the location of the labels to the side
-                    ax1.legend(wedges, names,
+                    ax1.legend(wedges, names1,
                             title="Sentiments",
                             loc="center left",
                             bbox_to_anchor=(1, 0, 0.5, 1))
